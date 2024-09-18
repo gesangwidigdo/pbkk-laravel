@@ -289,3 +289,91 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 ![Access About](./readme-asset/tugas-1/access-about.png)
 
 ![Access Blog](./readme-asset/tugas-1/access-blog.png)
+
+## Tugas 2
+
+1. Perubahan pada video [6. View Data](https://www.youtube.com/watch?v=76YsC4EjGE4&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=6&ab_channel=WebProgrammingUNPAS)
+
+    - Menambahkan ```@props``` untuk menyembunyikan atribut ```active``` saat console dibuka
+    
+        ```php
+        @props(['active' => false])
+
+        <a {{ $attributes }} class="{{ $active ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium text-white" aria-current="{{ $active ? 'page' : false }}">
+        {{ $slot }}
+        </a>
+        ```
+
+    - Rename `blog.blade.php` menjadi `posts.blade.php`
+
+    - Update data artikel di routes `/posts` dan membuat rute baru untuk melihat detail artikel dengan rute `/posts/{slug}`
+
+        ```php
+        Route::get('/posts', function () {
+            return view('posts',[
+                'title' => 'Blog',
+                'posts' => [
+                    [
+                        'id' => 1,
+                        'slug' => 'judul-artikel-1',
+                        'title' => 'Judul Artikel 1',
+                        'author' => 'Gesang Widigdo',
+                        'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sapiente exercitationem enim facilis delectus inventore amet neque eaque, nostrum, sunt quod! Est laboriosam consequatur tenetur fuga fugit magnam maxime neque voluptatum eum cum aliquid, quia, id molestiae saepe aspernatur ullam eius, quos odio exercitationem nulla harum. Voluptates sequi exercitationem fugiat voluptatum aspernatur iusto facere aperiam dolor, suscipit assumenda, reprehenderit, repellendus modi quis asperiores. Ipsam officiis, quidem quae sint, libero adipisci cum laborum voluptate quos, quis consectetur eligendi ullam enim ex ipsa similique nemo ut vel at esse eum veritatis provident. Corporis consequuntur deserunt voluptatum delectus veniam dolore possimus aliquid voluptas.',
+                    ],
+                    ...
+                ]
+            ]);
+        });
+
+        Route::get('/posts/{slug}', function($slug) {
+            $posts = [...]
+        });
+        ```
+
+    - Memanfaatkan `foreach()` di `posts.blade.php` untuk melakukan perulangan dalam menampilkan data di route `/posts` dan memberikan limit jumlah karakter di artikel body yang ditampilkan menggunakan `Str::limit()`
+
+        ```php
+        <x-layout>
+            <x-slot:title>{{ $title }}</x-slot:title>
+
+            @foreach ($posts as $post)
+            <article class="py-8 max-w-screen-md border-b border-gray-300">
+                <a href="/posts/{{ $post['slug'] }}"><h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-950 hover:underline">{{ $post['title'] }}</h2></a>
+                <div class="text-base text-gray-500">
+                    <a href="#">{{ $post['author'] }}</a> | 18 September 2024
+                </div>
+
+                <p class="my-4 font-light">
+                    {{ Str::limit($post['body'], 100) }}
+                </p>
+                <a href="/posts/{{ $post['slug'] }}" class="font-medium text-blue-500 hover:underline">Read more &raquo;</a>
+            </article>
+            @endforeach
+        </x-layout>
+        ```
+    
+    - Membuat halaman untuk menampilkan isi artikel di `post.blade.php`
+
+        ```php
+        <x-layout>
+            <x-slot:title>{{ $title }}</x-slot:title>
+
+            <article class="py-8 max-w-screen-md">
+                <h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-950 hover:underline">{{ $post['title'] }}</h2>
+                <div class="text-base text-gray-500">
+                    <a href="#">{{ $post['author'] }}</a> | 18 September 2024
+                </div>
+
+                <p class="my-4 font-light">
+                    {{ $post['body'] }}
+                </p>
+                <a href="/posts" class="font-medium text-blue-500 hover:underline">&laquo; Back to post</a>
+            </article>
+        </x-layout>
+        ```
+    
+    Hasil
+
+    ![Posts](./readme-asset/tugas-2/posts.png)
+
+    ![Post](./readme-asset/tugas-2/post.png)
