@@ -515,7 +515,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
     - Melakukan simulasi insert data ke Model menggunakan tinker dengan perintah `php artisan tinker`
 
-        ![Tinker Usage](url)
+        ![Tinker Usage](https://github.com/user-attachments/assets/3ce01e87-7adc-474d-af2d-a95248ed8cfb)
 
         Dapat dilihat dari gambar di atas bahwa field `created_at` dan `updated_at` terisi secara otomatis
     
@@ -525,7 +525,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->format('d F Y') }}
         ```
 
-        ![Formatted Date]()
+        ![Formatted Date](https://github.com/user-attachments/assets/3ed091b8-b350-4781-8ebe-a6fcab5fcb3b)
 
         Kita juga bisa menampilkan berdasarkan sudah berapa menit sejak post tersebut dibut dengan menggunakan fungsi `diffForHumans()`.
 
@@ -533,4 +533,4 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->diffForHumans() }}
         ```
 
-        ![diffForHumans Image]()
+        ![diffForHumans Image](https://github.com/user-attachments/assets/7cfaf53e-ac02-4f31-85ea-4e4b17860ccb)
