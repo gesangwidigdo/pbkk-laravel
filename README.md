@@ -6,7 +6,7 @@
 
 </div>
 
-## Tugas 1
+## Minggu 1
 
 ### 1. Halaman Awal dan Membuat Halaman
 
@@ -290,7 +290,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
 ![Access Blog](./readme-asset/tugas-1/access-blog.png)
 
-## Tugas 2
+## Minggu 2
 
 1. Perubahan pada video [6. View Data](https://www.youtube.com/watch?v=76YsC4EjGE4&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=6&ab_channel=WebProgrammingUNPAS)
 
@@ -453,3 +453,32 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         Saat mengakses rute yang tidak diketahui (misal /posts/judul-artikel-3) maka akan diarahkan ke halaman 404.
 
         ![404 Page](./readme-asset/tugas-2/404page.png)
+
+## Minggu 3
+
+1. Perubahan pada video [8. Database & Migration](https://www.youtube.com/watch?v=eghZY9-3Wko&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=8&ab_channel=WebProgrammingUNPAS)
+
+    - Membuat database SQLite dengan TablePlus dan melakukan migrasi
+
+        ![SQLite Database](image.png)
+
+    - Membuat database MySQL dengan TablePlus dan melakukan migrasi (Hanya sebagai tambahan saja. Database yang digunakan tetap SQLite)
+
+        ![MySQL Database](image-2.png)
+
+    - Membuat file migration untuk tabel posts dengan skema berikut
+    
+        ```php
+        Schema::create('posts', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->string('slug')->unique();
+                $table->string('author');
+                $table->text('body');
+                $table->timestamps();
+            });
+        ```
+
+    - Menambahkan data ke dalam tabel `posts` yang telah dibuat sebelumnya
+
+        ![Posts Data](image-3.png)
