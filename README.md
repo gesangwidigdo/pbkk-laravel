@@ -460,11 +460,11 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
     - Membuat database SQLite dengan TablePlus dan melakukan migrasi
 
-        ![SQLite Database](image.png)
+        ![SQLite Database](https://github.com/user-attachments/assets/21535849-ecff-4fb0-be7e-cd9a1cf7246c)
 
     - Membuat database MySQL dengan TablePlus dan melakukan migrasi (Hanya sebagai tambahan saja. Database yang digunakan tetap SQLite)
 
-        ![MySQL Database](image-2.png)
+        ![MySQL Database](https://github.com/user-attachments/assets/3f52c0b2-87c6-43e9-aba0-098b85651863)
 
     - Membuat file migration untuk tabel posts dengan skema berikut
     
@@ -481,4 +481,4 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
     - Menambahkan data ke dalam tabel `posts` yang telah dibuat sebelumnya
 
-        ![Posts Data](image-3.png)
+        ![Posts Data](https://github.com/user-attachments/assets/68e035dc-50f8-4f0b-bc40-5918b2fedf9f)
