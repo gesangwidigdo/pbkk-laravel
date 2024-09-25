@@ -482,3 +482,55 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
     - Menambahkan data ke dalam tabel `posts` yang telah dibuat sebelumnya
 
         ![Posts Data](https://github.com/user-attachments/assets/68e035dc-50f8-4f0b-bc40-5918b2fedf9f)
+
+2. Perubahan pada video [9. Eloquent ORM & Post Model](https://www.youtube.com/watch?v=dW3-33iMYkk&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=9&ab_channel=WebProgrammingUNPAS)
+
+    - Mengupdate model `Post` agar terhubung ke tabel `posts` dengan menambahkan keyword `extends Model`
+
+        ```php
+        use Illuminate\Database\Eloquent\Model;
+        use Illuminate\Support\Arr;
+
+        class Post extends Model {
+            protected $table = 'posts';
+            protected $primaryKey = 'id';
+            protected $fillable = [
+                'title', 'slug', 'author', 'body'
+            ];
+        }
+        ```
+
+    - Memanfaatkan *Route Model Binding* untuk mendapatkan data sesuai field yang ditentukan pada route
+
+        ```php
+        Route::get('/posts/{post:slug}', function(Post $post) {
+            return view('post', [
+                'title' => 'Single Post',
+                'post' => $post,
+            ]);
+        });
+        ```
+
+        Pada kode di atas, dicari data yang memiliki slug sesuai yang diminta oleh user
+
+    - Melakukan simulasi insert data ke Model menggunakan tinker dengan perintah `php artisan tinker`
+
+        ![Tinker Usage](url)
+
+        Dapat dilihat dari gambar di atas bahwa field `created_at` dan `updated_at` terisi secara otomatis
+    
+    - Menampilkan tanggal berdasarkan `created_at` dan menampilkannya berdasarkan format tanggal bulan tahun.
+
+        ```php
+        <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->format('d F Y') }}
+        ```
+
+        ![Formatted Date]()
+
+        Kita juga bisa menampilkan berdasarkan sudah berapa menit sejak post tersebut dibut dengan menggunakan fungsi `diffForHumans()`.
+
+        ```php
+        <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->diffForHumans() }}
+        ```
+
+        ![diffForHumans Image]()
