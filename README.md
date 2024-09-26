@@ -500,7 +500,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         }
         ```
 
-    - Memanfaatkan *Route Model Binding* untuk mendapatkan data sesuai field yang ditentukan pada route
+    - Memanfaatkan **Route Model Binding** untuk mendapatkan data sesuai field yang ditentukan pada route
 
         ```php
         Route::get('/posts/{post:slug}', function(Post $post) {
@@ -534,3 +534,66 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         ```
 
         ![diffForHumans Image](https://github.com/user-attachments/assets/7cfaf53e-ac02-4f31-85ea-4e4b17860ccb)
+
+3. Perubahan pada video [10. Model Factories](https://www.youtube.com/watch?v=1wWXyO4iuBA&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=10&ab_channel=WebProgrammingUNPAS)
+
+    - Membuat data user menggunakan factory untuk tabel User dengan perintah `php artisan tinker` kemudian `App\Models\User::factory(100)->create();` untuk meng-*generate* 100 data
+
+        ```php
+        class UserFactory extends Factory
+        {
+            protected static ?string $password;
+
+            /**
+            * @return array<string, mixed>
+            */
+            public function definition(): array
+            {
+                return [
+                    'name' => fake()->name(),
+                    'email' => fake()->unique()->safeEmail(),
+                    'email_verified_at' => now(),
+                    'password' => static::$password ??= Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                ];
+            }
+
+            /**
+            * Indicate that the model's email address should be unverified.
+            */
+            public function unverified(): static
+            {
+                return $this->state(fn (array $attributes) => [
+                    'email_verified_at' => null,
+                ]);
+            }
+        }
+        ```
+
+        ![User Factory Image](url)
+
+    - Membuat Factory untuk meng-*generate* data Post, kemudian menambahkan data *dummy* sebanyak 200 data.
+
+        ```php
+        class PostFactory extends Factory
+        {
+            /**
+            * Define the model's default state.
+            *
+            * @return array<string, mixed>
+            */
+            public function definition(): array
+            {
+                return [
+                    'title' => fake()->sentence(),
+                    'author' => fake()->name(),
+                    'slug' => Str::slug(fake()->sentence()),
+                    'body' => fake()->text(1000),
+                ];
+            }
+        }
+        ```
+
+        Kemudian program dijalankan dengan masuk ke tinker kemudian menjalankan perintah `App\Models\Post::factory(200)->create();` untuk membuat 200 posts.
+
+        ![Post Factory Image]()
