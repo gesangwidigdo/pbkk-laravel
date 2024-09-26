@@ -570,7 +570,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         }
         ```
 
-        ![User Factory Image](url)
+        ![User Factory Image](https://github.com/user-attachments/assets/bdf24a6a-0c23-4f5e-8f66-28137cec78af)
 
     - Membuat Factory untuk meng-*generate* data Post, kemudian menambahkan data *dummy* sebanyak 200 data.
 
@@ -596,4 +596,4 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
         Kemudian program dijalankan dengan masuk ke tinker kemudian menjalankan perintah `App\Models\Post::factory(200)->create();` untuk membuat 200 posts.
 
-        ![Post Factory Image]()
+        ![Post Factory Image](https://github.com/user-attachments/assets/18c61341-e18f-44c2-8bfe-90c119dc0b14)
