@@ -597,3 +597,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         Kemudian program dijalankan dengan masuk ke tinker kemudian menjalankan perintah `App\Models\Post::factory(200)->create();` untuk membuat 200 posts.
 
         ![Post Factory Image](https://github.com/user-attachments/assets/18c61341-e18f-44c2-8bfe-90c119dc0b14)
+
+    Berikut adalah hasil dari post yang di*generate* menggunakan `PostFactory`
+
+    ![Hasil Video 10]
