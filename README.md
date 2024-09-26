@@ -600,4 +600,4 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
     Berikut adalah hasil dari post yang di*generate* menggunakan `PostFactory`
 
-    ![Hasil Video 10]
+    ![Hasil Video 10](https://github.com/user-attachments/assets/22a3c6cb-89c5-4262-831e-75e19f49c68c)
