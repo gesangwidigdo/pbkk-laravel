@@ -675,7 +675,7 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
         Hasilnya adalah sebagai berikut
 
-        ![name based on author id]()
+        ![Name Based on Author ID](https://github.com/user-attachments/assets/23b5bd39-d1a8-485f-83fd-eee5d3a69c88)
 
     - Update `web.php` untuk menambahkan rute ke `/authors/{user}` yang akan menamppilkan author beserta post yang sudah ditulis.
 
@@ -690,4 +690,4 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
     Tampilannya akan menjadi seperti berikut
 
-    ![Post by Author]()
+    ![Post By Author](https://github.com/user-attachments/assets/59cfde4f-b09b-4fea-b33b-05286c2b3fe2)
