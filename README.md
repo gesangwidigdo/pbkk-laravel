@@ -535,7 +535,9 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
 
         ![diffForHumans Image](https://github.com/user-attachments/assets/7cfaf53e-ac02-4f31-85ea-4e4b17860ccb)
 
-3. Perubahan pada video [10. Model Factories](https://www.youtube.com/watch?v=1wWXyO4iuBA&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=10&ab_channel=WebProgrammingUNPAS)
+## Minggu 4
+
+1. Perubahan pada video [10. Model Factories](https://www.youtube.com/watch?v=1wWXyO4iuBA&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=10&ab_channel=WebProgrammingUNPAS)
 
     - Membuat data user menggunakan factory untuk tabel User dengan perintah `php artisan tinker` kemudian `App\Models\User::factory(100)->create();` untuk meng-*generate* 100 data
 
@@ -601,3 +603,91 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
     Berikut adalah hasil dari post yang di*generate* menggunakan `PostFactory`
 
     ![Hasil Video 10](https://github.com/user-attachments/assets/22a3c6cb-89c5-4262-831e-75e19f49c68c)
+
+2. Perubahan pada video [11. Eloquent Relationship](https://www.youtube.com/watch?v=S2eh1VnHu40&list=PLFIM0718LjIW1Xb7cVj7LdAr32ATDQMdr&index=11&ab_channel=WebProgrammingUNPAS)
+
+    - Mengupdate migration untuk tabel `posts` dan menambahkan *constrained relationship* untuk menghubungkan tabel `users` dan `posts`.
+
+        ```php
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->foreignId('author_id')->constrained(
+                table: 'users', 
+                indexName: 'posts_author_id'
+            );
+            $table->text('body');
+            $table->timestamps();
+        });
+        ```
+
+    - Mengupdate `PostFactory.php` dengan mengubah `author` menjadi `author_id` yang digenerate menggunakan `User::factory()` untuk membuat posts dan user secara otomatis yang id nya akan dimasukkan ke kolom `author_id` pada tabel `posts`
+
+        ```php
+        public function definition(): array
+        {
+            return [
+                'title' => fake()->sentence(),
+                'author_id' => User::factory(),
+                'slug' => Str::slug(fake()->sentence()),
+                'body' => fake()->text(1000),
+            ];
+        }
+        ```
+
+        Kemudian untuk menjalankan factory di atas, dapat dengan masuk ke tinker dan jalankan perintah berikut
+    
+        ```bash
+        App\Models\Post::factory(100)->recycle(User::factory(5)->create())->create()
+        ```
+
+        Perintah di atas akan membuat 100 post dan 5 user, dimana id user akan ditempatkan secara acak di 100 post tersebut.
+
+    - Mengupdate model `Post` dan `User` untuk menambahkan relationship antar model, dengan menambahkan kode berikut.
+
+        Post.php
+
+        ```php
+        public function author(): BelongsTo {
+            return $this->belongsTo(User::class);
+        }
+        ```
+
+        User.php
+
+        ```php
+        public function posts(): HasMany
+        {
+            return $this->hasMany(Post::class, 'author_id');
+        }
+        ```
+
+        Kode pertama artinya 1 post hanya memiliki 1 author, kode kedua artinya satu author dapat memiliki banyak post. Parameter kedua dari blok kode kedua artinya kita memberi tahu laravel bahwa foreign key yang menghubungkan tabel post dan user adalah `author_id`.
+
+    - Pada `posts.blade.php` dan `post.blade.php`, ubah `$post['author_id']` menjadi `$post->author->name` untuk menampilkan nama author sesuai `author_id`. Selain itu ditambahkan juga rute untuk menampilkan author beserta list post yang sudah ditulis.
+    
+        ```html
+        <div class="text-base text-gray-500">
+            <a class="hover:underline" href="/authors/{{ $post->author->id }}">{{ $post->author->name }}</a> | {{ $post->created_at->diffForHumans() }}
+        </div>
+        ```
+
+        Hasilnya adalah sebagai berikut
+
+        ![name based on author id]()
+
+    - Update `web.php` untuk menambahkan rute ke `/authors/{user}` yang akan menamppilkan author beserta post yang sudah ditulis.
+
+        ```php
+        Route::get('/authors/{user}', function(User $user) {
+            return view('posts', [
+                'title' => 'Articles by ' . $user->name,
+                'posts' => $user->posts,
+            ]);
+        });
+        ```
+
+    Tampilannya akan menjadi seperti berikut
+
+    ![Post by Author]()
