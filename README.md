@@ -688,6 +688,6 @@ Tampilan dari perubahan di atas apat dilihat saat kita mengakses halaman lain.
         });
         ```
 
-    Tampilannya akan menjadi seperti berikut
+        Tampilannya akan menjadi seperti berikut
 
-    ![Post By Author](https://github.com/user-attachments/assets/59cfde4f-b09b-4fea-b33b-05286c2b3fe2)
+        ![Post By Author](https://github.com/user-attachments/assets/59cfde4f-b09b-4fea-b33b-05286c2b3fe2)
